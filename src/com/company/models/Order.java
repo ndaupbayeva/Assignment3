@@ -1,19 +1,17 @@
 package com.company.models;
 import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Order {
     private int id;
     private String name;
     private boolean finished;
-    private Date date;
-    private LocalDateTime time;
+    private String date;
+    private String time;
     private String shipping_method;
 
-    public Order(){}
+    public Order(int id, String name, boolean finished, String time, String shipping_method){}
 
-    public Order(String name, boolean finished, Date date, LocalDateTime time, String shipping_method) {
+    public Order(String name, boolean finished, String date, String time, String shipping_method) {
         setName(name);
         setFinished(finished);
         setDate(date);
@@ -21,7 +19,7 @@ public class Order {
         setShipping_method(shipping_method);
     }
 
-    public Order(int id, String name, boolean finished, Date date, LocalDateTime time, String shipping_method) {
+    public Order(int id, String name, boolean finished, String date, String time, String shipping_method) {
         this(name, finished, date, time, shipping_method);
         setId(id);
     }
@@ -51,19 +49,19 @@ public class Order {
         this.finished = finished;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalDateTime getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

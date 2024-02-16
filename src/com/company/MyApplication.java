@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.controllers.AdminController;
 
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -59,16 +60,13 @@ public class MyApplication {
                         System.out.print("Enter option (1-3): ");
                         int option2 = scanner.nextInt();
                         if (option2 == 1) {
-                            //Function For Adding Dish
-                            System.out.println("Dish added");
+                            addDishMenu();
                         }
                         if (option2 == 2) {
-                            //Function For Deleting Dish
-                            System.out.println("Dish deleted");
+                            deleteDishMenu();
                         }
                         if (option2 == 3) {
-                            //Function For Listing All Dishes
-                            System.out.println("List of Dishes");
+                            getAllDishesMenu();
                         }
                         if (option2 == 4) {
                             //Function For Updating Dishes
@@ -88,16 +86,13 @@ public class MyApplication {
                         System.out.print("Enter option (1-3): ");
                         int option2 = scanner.nextInt();
                         if (option2 == 1){
-                            //Function For Adding Dish
-                            System.out.println("Order added");
+                            addOrderMenu();
                         }
                         if (option2 == 2){
-                            //Function For Deleting Dish
-                            System.out.println("Order deleted");
+                            deleteOrderMenu();
                         }
                         if (option2== 3){
-                            //Function For Listing All Dishes
-                            System.out.println("List of Orders");
+                            getAllOrdersMenu();
                         }
                     }catch(InputMismatchException e) {
                         System.out.println("Input must be integer: " + e);
@@ -145,5 +140,58 @@ public class MyApplication {
     public void getAllEmployeesMenu(){
         String response = controller.getAllEmployees();
         System.out.println(response);
+    }
+
+    public void addDishMenu(){
+        System.out.println("Please enter name");
+        String name = scanner.next();
+        System.out.println("Please enter difficulty");
+        int difficulty = scanner.nextInt();
+        System.out.println("Please enter cost");
+        int cost = scanner.nextInt();
+
+        String response = controller.addDish(name, difficulty, cost);
+        System.out.println(response);
+    }
+
+    public void deleteDishMenu(){
+        System.out.println("Please enter id");
+
+        int id = scanner.nextInt();
+        String response = controller.deleteDish(id);
+        System.out.println(response);
+    }
+
+    public void getAllDishesMenu(){
+        String response = controller.getAllDishes();
+        System.out.println(response);
+    }
+
+    public void addOrderMenu(){
+        System.out.println("Please enter name");
+        String name = scanner.next();
+        System.out.println("Please enter order status");
+        Boolean finished = scanner.nextBoolean();
+        System.out.println("Please enter date");
+        String date = scanner.next();
+        System.out.println("Please enter time");
+        String time = scanner.next();
+        System.out.println("Please enter shipping_method");
+        String shipping_method = scanner.next();
+
+        String response = controller.addOrder(name, finished, date, time, shipping_method);
+        System.out.println(response);
+    }
+    public void deleteOrderMenu(){
+        System.out.println("Please enter id");
+
+        int id = scanner.nextInt();
+        String response = controller.deleteOrder(id);
+        System.out.println(response);
+    }
+    public void getAllOrdersMenu(){
+        String response = controller.getAllOrders();
+        System.out.println(response);
+
     }
 }
