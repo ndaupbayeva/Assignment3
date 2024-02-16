@@ -4,9 +4,9 @@ import com.company.data.interfaces.IDB;
 import com.company.models.Employee;
 import com.company.repositories.interfaces.IRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AdminRepository implements IRepository {
 
@@ -47,5 +47,70 @@ public class AdminRepository implements IRepository {
 
 
         return false;
+    }
+
+    @Override
+    public boolean deleteEmployee(int id){
+        Connection con = null;
+
+        try {
+            con = db.getConnection();
+            String sql = "DELETE from employees where ID = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+
+            st.setInt(1, id);
+
+            int rowsAffected = st.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("sql error: " + e.getMessage());
+        } finally {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                System.out.println("sql error: " + e.getMessage());
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        Connection con = null;
+
+        try {
+            con = db.getConnection();
+            String sql = "SELECT id,name,surname,position,age,gender FROM employees";
+            Statement st = con.createStatement();
+
+            ResultSet rs = st.executeQuery(sql);
+            List<Employee> employess = new LinkedList<>();
+            while (rs.next()) {
+                Employee employee = new Employee(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("position"),
+                        rs.getInt("age"),
+                        rs.getBoolean("gender"));
+
+                employess.add(employee);
+            }
+
+            return employess;
+        } catch (SQLException e) {
+            System.out.println("sql error: " + e.getMessage());
+        } finally {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                System.out.println("sql error: " + e.getMessage());
+            }
+        }
+
+        return null;
     }
 }

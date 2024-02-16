@@ -39,10 +39,10 @@ public class MyApplication {
                             addEmployeeMenu();
                         }
                         if (option2 == 2){
-                            //deleteEmployeeMenu();
+                            deleteEmployeeMenu();
                         }
                         if (option2== 3){
-                            //getAllEmployeesMenu();
+                            getAllEmployeesMenu();
                         }
                     }catch(InputMismatchException e) {
                         System.out.println("Input must be integer: " + e);
@@ -131,6 +131,19 @@ public class MyApplication {
         String gender = scanner.next();
 
         String response = controller.addEmployee(name, surname, position, age, gender);
+        System.out.println(response);
+    }
+
+    public void deleteEmployeeMenu(){
+        System.out.println("Please enter id");
+
+        int id = scanner.nextInt();
+        String response = controller.deleteEmployee(id);
+        System.out.println(response);
+    }
+
+    public void getAllEmployeesMenu(){
+        String response = controller.getAllEmployees();
         System.out.println(response);
     }
 }

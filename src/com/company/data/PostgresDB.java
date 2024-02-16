@@ -14,7 +14,6 @@ public class PostgresDB implements IDB {
         try {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection(connectionUrl, "postgres", "0000");
-            System.out.println("Connection Established");
             return con;
         } catch (Exception e) {
             System.out.println("Failed to connect to postgres: " + e.getMessage());
